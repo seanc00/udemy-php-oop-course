@@ -2,6 +2,6 @@
 
 class Car {
     public function run() {
-        echo "<h1>Hello, car.php is running, noob</h1>";
+        echo "<h1>Hello, car.php is running</h1>";
     }
 }
