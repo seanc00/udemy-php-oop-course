@@ -1,6 +1,12 @@
 <?php
 
 class User {
+    public $id;
+    public $username;
+    public $password;
+    public $first_name;
+    public $last_name;
+
     public static function findAllUsers() {
         return self::findThisQuery("SELECT * FROM users");
     }
@@ -9,11 +15,9 @@ class User {
     public static function findUserById($id) {
         global $database;
 
-        $result = self::findThisQuery("SELECT * FROM users WHERE id={$id} LIMIT 1");
+        $resultArray = self::findThisQuery("SELECT * FROM users WHERE id={$id} LIMIT 1");
 
-        $foundUser = mysqli_fetch_array($result);
-
-        return $foundUser;
+        return !empty($resultArray) ? array_shift($resultArray) : false;
     }
 
 
@@ -22,6 +26,38 @@ class User {
 
         $resultSet = $database->query($sql);
 
-        return $resultSet;
+        $theObjectArray = array();
+
+        while($row = mysqli_fetch_array($resultSet)) {
+            $theObjectArray[] = self::instantiation($row);
+        }
+
+        return $theObjectArray;
+    }
+
+
+    public static function instantiation($record) {
+        $object = new self;
+
+        // $object->id = $found['id'];
+        // $object->username = $found['username'];
+        // $object->password = $found['password'];
+        // $object->first_name = $found['first_name'];
+        // $object->last_name = $found['last_name'];
+
+        foreach ($record as $attribute => $value) {
+            if($object->has_the_attribute($attribute)) {
+                $object->$attribute = $value;
+            }
+        }
+
+        return $object;
+    }
+
+
+    private function has_the_attribute($attribute) {
+        $objectProperties = get_object_vars($this);
+
+        return array_key_exists($attribute, $objectProperties);
     }
 }

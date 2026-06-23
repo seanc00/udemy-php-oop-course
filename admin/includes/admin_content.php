@@ -15,15 +15,26 @@
 
             <?php 
 
-            $resultSet = User::findAllUsers();
-            
-            while($row = mysqli_fetch_array($resultSet)) {
-                echo $row['username'] . "<br>";
-            }
+            // $resultSet = User::findAllUsers();
+            // while($row = mysqli_fetch_array($resultSet)) {
+            //     echo $row['username'] . "<br>";
+            // }
 
 
-            // $result = User::findUserById(1);
-            // echo $result['username'];
+            // $result = User::findUserById(2);
+            // $user = User::instantiation($result);
+            // echo $user->username;
+
+
+            // $users = User::findAllUsers();
+
+            // foreach ($users as $user) {
+            //     echo $user->username . "<br>";
+            // }
+
+
+            $foundUser = User::findUserById(1);
+            echo $foundUser->username;
 
             ?>
         </div>
