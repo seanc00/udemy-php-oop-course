@@ -40,10 +40,27 @@
 
             // =============================
             //HOW TO DELETE USER
-            if(User::findUserById(14)) {
-                $user = User::findUserById(14);
-                $user->deleteUser();
-            }
+            // if(User::findUserById(14)) {
+            //     $user = User::findUserById(14);
+            //     $user->deleteUser();
+            // }
+            // =============================
+
+
+            // =============================
+            //USING SAVE METHOD TO UPDATE NAME
+            $user = User::findUserById(17);
+
+            $user->password = "password";
+
+            $user->save();
+
+            //USING SAVE METHOD TO CREATE USER
+            // $user = new User();
+
+            // $user->username = "WHATEVER2000";
+
+            // $user->save();
             // =============================
             
             

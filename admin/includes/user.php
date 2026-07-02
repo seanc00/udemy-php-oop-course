@@ -76,6 +76,11 @@ class User {
     }
 
 
+    public function save() {
+        return isset($this->id) ? $this->update() : $this->create();
+    }
+
+
     // Create Method Query
     public function create() {
         global $database;
@@ -107,15 +112,14 @@ class User {
         $sql .= " WHERE id= " . $database->escape_string($this->id);
 
         $database->query($sql);
-        
-        return (mysqli_affected_rows($database->connection) == 1) ? true : false;
 
+        return (mysqli_affected_rows($database->connection) == 1) ? true : false;
     }
 
 
     public function deleteUser() {
         global $database;
-        
+
         $sql = "DELETE FROM users WHERE id=" . $database->escape_string($this->id) . " LIMIT 1";
 
         $database->query($sql);
