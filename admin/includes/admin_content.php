@@ -17,45 +17,45 @@
 
             // =============================
             // CREATE USER ADD TO DB
-            // $user = new User();
+            $user = new User();
             
-            // $user->username = "seanc02";
-            // $user->password = "password";
-            // $user->first_name = "Sean";
-            // $user->last_name = "Connolly";
+            $user->username = "seanc67";
+            $user->password = "password";
+            $user->first_name = "Sean";
+            $user->last_name = "Connolly";
             
-            // $user->create();
+            $user->create();
             // =============================
             
 
             // =============================
             //HOW TO UPDATE USER
-            // if (User::findUserById(16)) {
-                // $user = User::findUserById(16);
-                // $user->last_name = "TONY";
-                // $user->update();
+            // if (User::findUserById(18)) {
+            //     $user = User::findUserById(18);
+            //     $user->last_name = "TONY";
+            //     $user->update();
             // }
             // =============================
 
 
             // =============================
             //HOW TO DELETE USER
-            // if(User::findUserById(14)) {
-            //     $user = User::findUserById(14);
+            // if(User::findUserById(17)) {
+            //     $user = User::findUserById(17);
             //     $user->deleteUser();
             // }
             // =============================
 
 
             // =============================
-            //USING SAVE METHOD TO UPDATE NAME
-            $user = User::findUserById(17);
+            //USING SAVE METHOD TO UPDATE NAME/PASSWORD
+            // $user = User::findUserById(17);
 
-            $user->password = "password";
+            // $user->password = "password";
 
-            $user->save();
+            // $user->save();
 
-            //USING SAVE METHOD TO CREATE USER
+            // USING SAVE METHOD TO CREATE USER
             // $user = new User();
 
             // $user->username = "WHATEVER2000";

@@ -1,6 +1,8 @@
 <?php
 
 class User {
+    protected static $db_table = "users";
+    protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name');
     public $id;
     public $username;
     public $password;
@@ -53,12 +55,6 @@ class User {
     public static function instantiation($record) {
         $object = new self;
 
-        // $object->id = $found['id'];
-        // $object->username = $found['username'];
-        // $object->password = $found['password'];
-        // $object->first_name = $found['first_name'];
-        // $object->last_name = $found['last_name'];
-
         foreach ($record as $attribute => $value) {
             if($object->has_the_attribute($attribute)) {
                 $object->$attribute = $value;
@@ -76,6 +72,19 @@ class User {
     }
 
 
+    protected function properties() {
+        $properties = array();
+
+        foreach (self::$db_table_fields as $key => $db_field) {
+            if (property_exists($this, $db_field)) {
+                $properties[$db_field] = $this->$db_field;
+            }
+        }
+
+        return $properties;
+    }
+
+
     public function save() {
         return isset($this->id) ? $this->update() : $this->create();
     }
@@ -85,12 +94,10 @@ class User {
     public function create() {
         global $database;
 
-        $sql = "INSERT INTO users (username, password, first_name, last_name)";
-        $sql .= "VALUES ('";
-        $sql .= $database->escape_string($this->username) . "', '";
-        $sql .= $database->escape_string($this->password) . "', '";
-        $sql .= $database->escape_string($this->first_name) . "', '";
-        $sql .= $database->escape_string($this->last_name) . "')";
+        $properties = $this->properties();
+
+        $sql = "INSERT INTO " . self::$db_table . "(" . implode(",", array_keys($properties)) . ")";
+        $sql .= "VALUES ('" . implode("','", array_values($properties)) . "')";
 
         if($database->query($sql)) {
             $this ->id = $database->the_insert_id();
@@ -104,11 +111,16 @@ class User {
     public function update() {
         global $database;
 
-        $sql = "UPDATE users SET ";
-        $sql .= "username= '" . $database->escape_string($this->username) . "', ";
-        $sql .= "password= '" . $database->escape_string($this->password) . "', ";
-        $sql .= "first_name= '" . $database->escape_string($this->first_name) . "', ";
-        $sql .= "last_name= '" . $database->escape_string($this->last_name) . "' ";
+        $properties = $this->properties();
+
+        $properties_pairs = array();
+
+        foreach ($properties as $key => $value) {
+            $properties_pairs[] = "{$key}='{$value}'";
+        }
+
+        $sql = "UPDATE " . self::$db_table . " SET ";
+        $sql .= implode(", " , $properties_pairs);
         $sql .= " WHERE id= " . $database->escape_string($this->id);
 
         $database->query($sql);
@@ -120,7 +132,7 @@ class User {
     public function deleteUser() {
         global $database;
 
-        $sql = "DELETE FROM users WHERE id=" . $database->escape_string($this->id) . " LIMIT 1";
+        $sql = "DELETE FROM " . self::$db_table . " WHERE id=" . $database->escape_string($this->id) . " LIMIT 1";
 
         $database->query($sql);
 
