@@ -27,11 +27,23 @@
             // $user->create();
             // =============================
             
+
             // =============================
             //HOW TO UPDATE USER
-            $user = User::findUserById(16);
-            $user->last_name = "TONY";
-            $user->update();
+            // if (User::findUserById(16)) {
+                // $user = User::findUserById(16);
+                // $user->last_name = "TONY";
+                // $user->update();
+            // }
+            // =============================
+
+
+            // =============================
+            //HOW TO DELETE USER
+            if(User::findUserById(14)) {
+                $user = User::findUserById(14);
+                $user->deleteUser();
+            }
             // =============================
             
             
