@@ -15,26 +15,31 @@
 
             <?php 
 
-            // $resultSet = User::findAllUsers();
-            // while($row = mysqli_fetch_array($resultSet)) {
-            //     echo $row['username'] . "<br>";
-            // }
-
-
-            // $result = User::findUserById(2);
-            // $user = User::instantiation($result);
-            // echo $user->username;
-
-
-            // $users = User::findAllUsers();
-
-            // foreach ($users as $user) {
-            //     echo $user->username . "<br>";
-            // }
-
-
-            $foundUser = User::findUserById(1);
-            echo $foundUser->username;
+            // =============================
+            // CREATE USER ADD TO DB
+            // $user = new User();
+            
+            // $user->username = "seanc02";
+            // $user->password = "password";
+            // $user->first_name = "Sean";
+            // $user->last_name = "Connolly";
+            
+            // $user->create();
+            // =============================
+            
+            // =============================
+            //HOW TO UPDATE USER
+            $user = User::findUserById(16);
+            $user->last_name = "TONY";
+            $user->update();
+            // =============================
+            
+            
+            // =============================
+            //FIND AND ECHO USER INFO TO ADMIN DASHBOARD
+            // $foundUser = User::findUserById(1);
+            // echo $foundUser->username;
+            // =============================
 
             ?>
         </div>
