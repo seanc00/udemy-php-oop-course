@@ -1,4 +1,14 @@
-<?php include("includes/header.php"); ?>
+<?php 
+
+    include("includes/header.php");
+
+    if (!$session->isSignedIn()) {
+        redirect("login.php");
+    }
+
+    $photos = Photo::findAll();
+
+?>
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -7,7 +17,6 @@
 
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <?php include(__DIR__ . "/includes/sidebar_nav.php"); ?>
-
 </nav>
 
 <div id="page-wrapper">
@@ -18,6 +27,7 @@
                 <h1 class="page-header">
                     🌇 Photos
                 </h1>
+
                 <ol class="breadcrumb">
                     <li>
                         <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
@@ -26,6 +36,31 @@
                         <i class="fa fa-file"></i> Photos
                     </li>
                 </ol>
+
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Id</th>
+                                <th>Filename</th>
+                                <th>Title</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($photos as $photo): ?>
+                                <tr>
+                                    <td><img src="<?= $photo->picture_path() ?? ''; ?>" alt="Placeholder" style="width: 200px; height: 100%; object-fit: cover;"></td>
+                                    <td><?= $photo->id ?? ''; ?></td>
+                                    <td><?= $photo->filename ?? ''; ?></td>
+                                    <td><?= $photo->title ?? ''; ?></td>
+                                    <td><?= $photo->size ?? ''; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- /.row -->
