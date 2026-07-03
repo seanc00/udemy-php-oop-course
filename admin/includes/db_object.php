@@ -148,7 +148,7 @@ class Db_object {
 
 
 
-    public function deleteUser() {
+    public function delete() {
         global $database;
 
         $sql = "DELETE FROM " . static::$db_table . " WHERE id=" . $database->escape_string($this->id) . " LIMIT 1";
