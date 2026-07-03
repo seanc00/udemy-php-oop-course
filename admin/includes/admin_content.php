@@ -16,15 +16,15 @@
             <?php 
 
             // =============================
-            // CREATE USER ADD TO DB
-            $user = new User();
+            // // CREATE USER ADD TO DB
+            // $user = new User();
             
-            $user->username = "Student";
-            $user->password = "password";
-            $user->first_name = "SOL";
-            $user->last_name = "Solo";
+            // $user->username = "Student";
+            // $user->password = "password";
+            // $user->first_name = "SOL";
+            // $user->last_name = "Solo";
             
-            $user->create();
+            // $user->create();
             // =============================
             
 
@@ -66,12 +66,22 @@
 
             // $user->save();
             // =============================
-            
-            
+
+
             // =============================
-            //FIND AND ECHO USER INFO TO ADMIN DASHBOARD
-            // $foundUser = User::findUserById(1);
+            // FIND AND ECHO USER INFO TO ADMIN DASHBOARD
+            // $foundUser = User::findById(3);
             // echo $foundUser->username;
+            // =============================
+
+
+            // =============================
+            // FIND ALL
+            $users = User::findAll();
+            
+            foreach($users as $user) {
+                echo $user->username . "<br>";
+            }
             // =============================
 
             ?>

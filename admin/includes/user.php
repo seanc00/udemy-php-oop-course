@@ -1,6 +1,6 @@
 <?php
 
-class User {
+class User extends Db_object {
     protected static $db_table = "users";
     protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name');
     public $id;
@@ -9,33 +9,7 @@ class User {
     public $first_name;
     public $last_name;
 
-    public static function findAllUsers() {
-        return self::findThisQuery("SELECT * FROM users");
-    }
 
-
-    public static function findUserById($id) {
-        global $database;
-
-        $resultArray = self::findThisQuery("SELECT * FROM users WHERE id={$id} LIMIT 1");
-
-        return !empty($resultArray) ? array_shift($resultArray) : false;
-    }
-
-
-    public static function findThisQuery($sql) {
-        global $database;
-
-        $resultSet = $database->query($sql);
-
-        $theObjectArray = array();
-
-        while($row = mysqli_fetch_array($resultSet)) {
-            $theObjectArray[] = self::instantiation($row);
-        }
-
-        return $theObjectArray;
-    }
 
 
     public static function verifyUser($username, $password) {
@@ -52,24 +26,6 @@ class User {
     }
 
 
-    public static function instantiation($record) {
-        $object = new self;
-
-        foreach ($record as $attribute => $value) {
-            if($object->has_the_attribute($attribute)) {
-                $object->$attribute = $value;
-            }
-        }
-
-        return $object;
-    }
-
-
-    private function has_the_attribute($attribute) {
-        $objectProperties = get_object_vars($this);
-
-        return array_key_exists($attribute, $objectProperties);
-    }
 
 
     protected function properties() {
@@ -85,6 +41,8 @@ class User {
     }
 
 
+
+
     protected function clean_properties() {
         global $database;
 
@@ -98,9 +56,13 @@ class User {
     }
 
 
+
+
     public function save() {
         return isset($this->id) ? $this->update() : $this->create();
     }
+
+
 
 
     // Create Method Query
@@ -119,6 +81,8 @@ class User {
             return false;
         }
     }
+
+
 
 
     public function update() {
@@ -140,6 +104,8 @@ class User {
 
         return (mysqli_affected_rows($database->connection) == 1) ? true : false;
     }
+
+
 
 
     public function deleteUser() {
