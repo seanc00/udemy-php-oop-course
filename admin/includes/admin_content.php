@@ -16,20 +16,22 @@
             <?php 
 
             // =============================
-            // // CREATE USER ADD TO DB
+            // USERS - CREATE USER ADD TO DB
             // $user = new User();
             
-            // $user->username = "Student";
+            // $user->username = "New user";
             // $user->password = "password";
             // $user->first_name = "SOL";
             // $user->last_name = "Solo";
             
             // $user->create();
+            // $user->save();
             // =============================
-            
+
+
 
             // =============================
-            //HOW TO UPDATE USER
+            // USERS - HOW TO UPDATE USER
             // if (User::findUserById(18)) {
             //     $user = User::findUserById(18);
             //     $user->username = "TONY";
@@ -42,17 +44,19 @@
             // =============================
 
 
+
             // =============================
-            //HOW TO DELETE USER
+            // USERS - HOW TO DELETE USER
             // if(User::findUserById(17)) {
             //     $user = User::findUserById(17);
-            //     $user->deleteUser();
+            //     $user->delete();
             // }
             // =============================
 
 
+
             // =============================
-            //USING SAVE METHOD TO UPDATE NAME/PASSWORD
+            // USERS - USING SAVE METHOD TO UPDATE NAME/PASSWORD
             // $user = User::findUserById(17);
 
             // $user->password = "password";
@@ -68,20 +72,57 @@
             // =============================
 
 
+
             // =============================
-            // FIND AND ECHO USER INFO TO ADMIN DASHBOARD
+            // USERS - FIND AND ECHO USER INFO TO ADMIN DASHBOARD
             // $foundUser = User::findById(3);
             // echo $foundUser->username;
             // =============================
 
 
+
             // =============================
-            // FIND ALL
-            $users = User::findAll();
+            // USERS - FIND ALL
+            // $users = User::findAll();
             
-            foreach($users as $user) {
-                echo $user->username . "<br>";
-            }
+            // foreach($users as $user) {
+            //     echo $user->username . "<br>";
+            // }
+            // =============================
+
+
+
+            // =============================
+            // FIND ALL - PHOTOS
+            // $photos = Photo::findAll();
+            
+            // foreach($photos as $photo) {
+            //     echo $photo->title . "<br>";
+            // }
+            // =============================
+
+
+
+            // =============================
+            // USERS - CREATE USER ADD TO DB
+            $photo = new Photo();
+            
+            $photo->title = "Sun Roof";
+            // $photo->description = "
+            //     Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            //     sed do eiusmod tempor incididunt ut labore et dolore magna 
+            //     aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+            //     ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            //     Duis aute irure dolor in reprehenderit in voluptate velit 
+            //     esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            //     occaecat cupidatat non proident, sunt in culpa qui officia 
+            //     deserunt mollit anim id est laborum.
+            // ";
+            // $photo->filename = "sunroof.png";
+            // $photo->type = "image";
+            $photo->size = 20;
+            
+            $photo->create();
             // =============================
 
             ?>
