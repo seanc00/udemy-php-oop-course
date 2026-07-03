@@ -19,10 +19,10 @@
             // CREATE USER ADD TO DB
             $user = new User();
             
-            $user->username = "seanc67";
+            $user->username = "Student";
             $user->password = "password";
-            $user->first_name = "Sean";
-            $user->last_name = "Connolly";
+            $user->first_name = "SOL";
+            $user->last_name = "Solo";
             
             $user->create();
             // =============================
@@ -32,7 +32,11 @@
             //HOW TO UPDATE USER
             // if (User::findUserById(18)) {
             //     $user = User::findUserById(18);
+            //     $user->username = "TONY";
+            //     $user->password = "TONY";
+            //     $user->first_name = "TONY";
             //     $user->last_name = "TONY";
+
             //     $user->update();
             // }
             // =============================

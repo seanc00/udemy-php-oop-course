@@ -85,6 +85,19 @@ class User {
     }
 
 
+    protected function clean_properties() {
+        global $database;
+
+        $cleanProperties = array();
+
+        foreach ($this->properties() as $key => $value) {
+            $cleanProperties[] = $database->escape_string($value);
+        }
+
+        return $cleanProperties;
+    }
+
+
     public function save() {
         return isset($this->id) ? $this->update() : $this->create();
     }
