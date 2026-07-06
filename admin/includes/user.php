@@ -39,13 +39,11 @@ class User extends Db_object {
             $this->errors[] = "There was no file uploaded here";
             return false;
         } elseif ($file['error'] !=0) {
-            $this->errors[] = $this->upload_errors_array[$file['error']];
+            $this->errors[] = $this->uploadErrors[$file['error']];
             return false;
         } else {
             $this->user_image = basename($file['name']);
             $this->tmp_path = $file['tmp_name'];
-            $this->type = $file['type'];
-            $this->size = $file['size'];
         }
     }
 
