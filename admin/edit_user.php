@@ -19,8 +19,15 @@
             $user->last_name = $_POST['last_name'];
             $user->password = $_POST['password'];
 
-            $user->set_file($_FILES['user_image']);
-            $user->save_pp();
+            if (empty($_FILES['user_image'])) {
+                $user->save();
+            } else {
+                $user->set_file($_FILES['user_image']);
+                $user->save_pp();
+                $user->save();
+
+                redirect("/admin/edit_user.php?id={$user->id}");
+            }
         }
     }
 ?>
@@ -45,7 +52,7 @@
 
                 <ol class="breadcrumb">
                     <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                        <i class="fa fa-user"></i>  <a href="/admin/users.php">Users</a>
                     </li>
                     <li class="active">
                         <i class="fa fa-user"></i> Add User
@@ -83,6 +90,7 @@
                         </div>
 
                         <div class="form-group">
+                            <a class="btn btn-danger" href="/admin/delete_user.php?id=<?= $user->id ?? ''; ?>">Delete</a>
                             <input type="submit" name="update" class="btn btn-primary pull-right" value="Update">
                         </div>
                     </div>
