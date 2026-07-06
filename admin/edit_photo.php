@@ -74,8 +74,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="caption">Description</label>
-                            <textarea class="form-control" name="description" id="" cols="30" rows="10"><?= $photo->description ?? ''; ?></textarea>
+                            <label for="summernote">Description</label>
+                            <textarea id="summernote" class="form-control" name="description" id="" cols="30" rows="10"><?= $photo->description ?? ''; ?></textarea>
                         </div>
                     </div>
 
