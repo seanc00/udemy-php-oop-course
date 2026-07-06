@@ -54,8 +54,8 @@
                                     <td>
                                         <img src="<?= $photo->picture_path() ?? ''; ?>" alt="Placeholder" style="width: 200px; height: 100%; object-fit: cover;">
                                         <div class="picture_link">
-                                            <a href="/admin/delete_photo.php/?id=<?= $photo->id ?? ''; ?>">Delete</a>
-                                            <a href="edit_photo.php">Edit</a>
+                                            <a href="/admin/delete_photo.php?id=<?= $photo->id ?? ''; ?>">Delete</a>
+                                            <a href="/admin/edit_photo.php?id=<?= $photo->id ?? ''; ?>">Edit</a>
                                             <a href="">View</a>
                                         </div>
                                     </td>
