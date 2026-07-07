@@ -18,7 +18,7 @@
             $user->set_file($_FILES['user_image']);
             $user->save_pp();
 
-            // $user->save();
+            $user->save();
         }
     }
 ?>

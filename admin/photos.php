@@ -46,6 +46,7 @@
                                 <th>Filename</th>
                                 <th>Title</th>
                                 <th>Size</th>
+                                <th>Comments</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,16 +54,24 @@
                                 <tr>
                                     <td>
                                         <img src="<?= $photo->picture_path() ?? ''; ?>" alt="Placeholder" style="width: 200px; height: 100%; object-fit: cover;">
-                                        <div class="picture_link">
+                                        <div class="action_links">
                                             <a href="/admin/delete_photo.php?id=<?= $photo->id ?? ''; ?>">Delete</a>
                                             <a href="/admin/edit_photo.php?id=<?= $photo->id ?? ''; ?>">Edit</a>
-                                            <a href="">View</a>
+                                            <a href="/photo.php?id=<?= $photo->id ?? ''; ?>">View</a>
                                         </div>
                                     </td>
                                     <td><?= $photo->id ?? ''; ?></td>
                                     <td><?= $photo->filename ?? ''; ?></td>
                                     <td><?= $photo->title ?? ''; ?></td>
                                     <td><?= $photo->size ?? ''; ?></td>
+                                    <td>
+                                        <a href="/admin/comment_photo.php?id=<?= $photo->id ?? ''; ?>">
+                                            <?php
+                                                $comment = Comment::find_the_comments($photo->id);
+                                                echo count($comment);
+                                            ?>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

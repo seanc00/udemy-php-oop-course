@@ -1,4 +1,14 @@
-<?php include("includes/header.php"); ?>
+<?php 
+
+    include("includes/header.php");
+
+    if (!$session->isSignedIn()) {
+        redirect("login.php");
+    }
+
+    $comments = Comment::findAll();
+
+?>
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -7,7 +17,6 @@
 
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <?php include(__DIR__ . "/includes/sidebar_nav.php"); ?>
-
 </nav>
 
 <div id="page-wrapper">
@@ -16,16 +25,42 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    ✏️ Comments
+                    💬 Comments
                 </h1>
+
                 <ol class="breadcrumb">
                     <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                        <i class="fa fa-dashboard"></i>  <a href="/admin">Admin Dashboard</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-file"></i> Comments
+                        comments
                     </li>
                 </ol>
+
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Author</th>
+                                <th>Body</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($comments as $comment): ?>
+                                <tr>
+                                    <td><?= $comment->id ?? ''; ?></td>
+                                    <td><?= $comment->author ?? ''; ?>
+                                        <div class="action_links">
+                                            <a href="/admin/delete_comment.php?id=<?= $comment->id ?? ''; ?>">Delete</a>
+                                        </div>
+                                    </td>
+                                    <td><?= $comment->body ?? ''; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- /.row -->
