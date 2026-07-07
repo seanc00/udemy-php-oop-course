@@ -145,11 +145,13 @@ class Db_object {
 
         $properties = $this->properties();
 
+        unset($properties['id']);
+
         $sql = "INSERT INTO " . static::$db_table . "(" . implode(",", array_keys($properties)) . ")";
         $sql .= "VALUES ('" . implode("','", array_values($properties)) . "')";
 
         if($database->query($sql)) {
-            $this ->id = $database->the_insert_id();
+            $this->id = $database->the_insert_id();
             return true;
         } else {
             return false;
